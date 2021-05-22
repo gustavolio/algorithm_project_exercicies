@@ -95,6 +95,8 @@ def heuristic_1(state, final):
 
 #Used to handle with the problem to compare equal values in a priority queue
 counter = itertools.count()
+# counter_steps = itertools.count()
+
 def bfs(current, final, visited):
     #Reccord positions from actual way
     pq = queue.PriorityQueue()
@@ -111,6 +113,7 @@ def bfs(current, final, visited):
         while not pq.empty():
             #Take the state of the first element of the queue
             current = pq.get()[2]
+            # next(counter_steps)
 
             #If to reach the final
             if current.digit == final.digit:
@@ -154,4 +157,5 @@ for test_case in range(n_test_cases):
         visited[forbidden[0]][forbidden[1]][forbidden[2]][forbidden[3]] = 1
     reading_line += n_forbidden + 1
 
-    print("{}".format(bfs(initial, final, visited)))
+    # print("{}".format(bfs(initial, final, visited)))
+    bfs(initial, final, visited)

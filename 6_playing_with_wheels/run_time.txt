@@ -1,58 +1,30 @@
 ---------------------------------------------
 playing_with_wheels < sample2.in
 
-real	0m6,909s
-user	0m6,975s
-sys	0m0,177s
+real	0m30,609s
+user	0m30,578s
+sys	0m0,017s
 
 playing_with_wheels_astar < sample2.in
 //heuristica = distancia euclidiana
 
-real	0m33,054s
-user	0m33,094s
-sys	0m0,205s
+real	0m6,346s
+user	0m6,484s
+sys	0m0,136s
 
 ---------------------------------------------
 playing_with_wheels < sample2.in
 
-real	0m6,909s
-user	0m6,975s
-sys	0m0,177s
+real	0m30,609s
+user	0m30,578s
+sys	0m0,017s
 
 playing_with_wheels_astar < sample2.in
-//heuristica = numero de passos
+//heuristica = numero de passos / distancia manhattan
 
-real	0m2,356s
-user	0m2,452s
-sys	0m0,128s
-
----------------------------------------------
-playing_with_wheels < sample.in
-
-real	0m0,378s
-user	0m0,469s
-sys	0m0,159s
-
-playing_with_wheels_astar < sample.in 
-//heuristica = distancia euclidiana
-
-real	0m0,287s
-user	0m0,410s
-sys	0m0,111s
-
----------------------------------------------
-playing_with_wheels < sample.in
-
-real	0m0,378s
-user	0m0,469s
-sys	0m0,159s
-
-playing_with_wheels_astar < sample.in 
-//heuristica = numero de passos
-
-real	0m0,221s
-user	0m0,316s
-sys	0m0,150s
+real	0m2,135s
+user	0m2,201s
+sys	0m0,207s
 ---------------------------------------------
 
 

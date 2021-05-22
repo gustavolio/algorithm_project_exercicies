@@ -7,6 +7,7 @@ __email__ = "g.cdcomp@gmail.com"
 import sys
 import queue
 import copy
+import itertools
 #______________Input_Matrix______________#
 matrix = []
 
@@ -75,6 +76,7 @@ def get_next_state(state):
 
     return next_states
 
+# counter_steps = itertools.count()
 def bfs(current, final, visited):
     #Reccord positions from actual way
     q = queue.Queue()
@@ -87,6 +89,7 @@ def bfs(current, final, visited):
 
         while not q.empty():
             current = q.get()
+            # next(counter_steps)
 
             #If to reach the final
             if current.digit == final.digit:
@@ -124,4 +127,5 @@ for test_case in range(n_test_cases):
         visited[forbidden[0]][forbidden[1]][forbidden[2]][forbidden[3]] = 1
     reading_line += n_forbidden + 1
 
-    print("{}".format(bfs(initial, final, visited)))
+    # print("{}".format(bfs(initial, final, visited)))
+    bfs(initial, final, visited)
