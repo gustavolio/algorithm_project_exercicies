@@ -30,7 +30,7 @@ reading_line = 0
 #output string
 output = ""
 
-#________Sultains_8_Queens_Problem________#
+#________Rat_in_a_Maze_Problem________#
 moves = [[1,0],
          [0,1],
          [-1,0],
@@ -43,7 +43,8 @@ class Coordinate:
 
 def print_sol(sol):
     for line in sol:
-        print(line)
+        string = ' '.join([str(item) for item in line])
+        print(string)
 
 
 def finish(coord, maze):
@@ -51,7 +52,7 @@ def finish(coord, maze):
         return True
     return False
 
-def get_next_moves(coord, maze, sol):
+def get_next_moves(coord, maze, sol):   
     new_moves = []
     maze_size = len(maze)
 
@@ -70,21 +71,25 @@ counter_states = itertools.count()
 def found_way(x, y, maze):
 
     q = queue.Queue()
-    sol = [[0 for x in range(len(maze))] for y in range(len(maze))]
-
+    #Put fist state on queue
     q.put(Coordinate(x,y))
+    #Mark as visited
     sol[x][y] = 1
 
     while not q.empty():
         current = q.get()
         next(counter_states)
 
+        #Check if is the final state
         if(finish(current, maze)):
-            print(counter_states)
+            print("Steps: {}".format(counter_states))
             return True
 
+        #Pass through all the possible moves
         for mov in get_next_moves(current, maze, sol):
+            #Mark as visited
             sol[mov.x][mov.y] = 1
+
             q.put(mov)
 
     return False
@@ -103,9 +108,13 @@ for test_case in range(n_test_cases):
     maze = matrix[reading_line:reading_line+maze_shape]
     reading_line += maze_shape
 
+    sol = [[0 for x in range(len(maze))] for y in range(len(maze))]
+
     if found_way(0,0, maze):
         print("Encontrei um Caminho!")
+        # print_sol(sol)
         # print("Encontrei um Caminho! -- Caso de teste: " + str(test_case))
     else:
         print("Não existe um Caminho!")
+        # print_sol(sol)
         # print("Não existe um Caminho! -- Caso de teste: " + str(test_case))

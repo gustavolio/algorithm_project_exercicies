@@ -5,7 +5,7 @@ __version__ = "1.0"
 __email__ = "g.cdcomp@gmail.com"
 
 import sys
-import queue
+import itertools
 
 #______________Input_Matrix______________#
 matrix = []
@@ -42,7 +42,8 @@ class Coordinate:
 
 def print_sol(sol):
     for line in sol:
-        print(line)
+        string = ' '.join([str(item) for item in line])
+        print(string)
 
 
 def finish(coord, maze):
@@ -65,11 +66,13 @@ def get_next_moves(coord, maze, sol):
     return new_moves
 
 
-
+counter_states = itertools.count()
 def find_way(coord, maze, sol):
-    
+    next(counter_states)
+
     if(finish(coord, maze)):
-            return True
+        print("Steps: {}".format(counter_states))
+        return True
 
     for mov in get_next_moves(coord, maze, sol):
             sol[mov.x][mov.y] = 1
@@ -77,12 +80,12 @@ def find_way(coord, maze, sol):
             if(find_way(mov, maze, sol)):
                 return True
 
-            sol[mov.x][mov.y] = 1
+            sol[mov.x][mov.y] = 0
 
     return False
 
 
-#__________Read_And_Run_Test_Cases__________#
+#________Rat_in_a_Maze_Problem________#
 
 n_test_cases = matrix[reading_line][0]
 reading_line += 1
@@ -96,10 +99,13 @@ for test_case in range(n_test_cases):
     reading_line += maze_shape
 
     sol = [[0 for x in range(len(maze))] for y in range(len(maze))]
+    sol[0][0] = 1
 
     if find_way(Coordinate(0,0), maze, sol):
         print("Encontrei um Caminho!")
+        # print_sol(sol)
         # print("Encontrei um Caminho! -- Caso de teste: " + str(test_case))
     else:
         print("Não existe um Caminho!")
+        # print_sol(sol)
         # print("Não existe um Caminho! -- Caso de teste: " + str(test_case))

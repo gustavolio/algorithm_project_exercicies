@@ -30,7 +30,7 @@ reading_line = 0
 #output string
 output = ""
 
-#________Sultains_8_Queens_Problem________#
+#________Rat_in_a_Maze_Problem________#
 moves = [[1,0],
          [0,1],
          [-1,0],
@@ -44,7 +44,8 @@ class Coordinate:
 
 def print_sol(sol):
     for line in sol:
-        print(line)
+        string = ' '.join([str(item) for item in line])
+        print(string)
 
 def finish(coord, maze):
     if coord.x == len(maze)-1 and coord.y == len(maze)-1 and maze[coord.x][coord.y] == 1:
@@ -65,6 +66,7 @@ def get_next_moves(coord, maze, sol):
 
     return new_moves
 
+#Manhattam distance
 def heuristic(coord, final):
     return abs(coord.x - final.x) + abs(coord.y - final.y)
 
@@ -72,21 +74,24 @@ def heuristic(coord, final):
 counter = itertools.count()
 counter_states = itertools.count()
 
+
 def found_way(initial, maze):
 
     final = Coordinate(len(maze)-1, len(maze)-1, 0)
     pq = queue.PriorityQueue()
-    sol = [[0 for i in range(len(maze))] for j in range(len(maze))]
 
+    #Put fist state on queue
     pq.put((0, next(counter), initial))
     sol[initial.x][initial.y] = 1
 
     while not pq.empty():
+        #Get the first element from priority queue
         current = pq.get()[2]
         next(counter_states)
 
+        #Check if is the final state
         if(finish(current, maze)):
-            print(counter_states)
+            print("Steps: {}".format(counter_states))
             return True
 
         g_cost = current.depth
@@ -115,11 +120,15 @@ for test_case in range(n_test_cases):
     maze = matrix[reading_line:reading_line + maze_shape]
     reading_line += maze_shape
 
+    sol = [[0 for i in range(len(maze))] for j in range(len(maze))]
+
     # print("Este é o tabuleiro {}\nTamanho: {}".format(chess_board, len(chess_board)))
 
     if found_way(Coordinate(0,0,0), maze):
         print("Encontrei um Caminho!")
+        # print_sol(sol)
         # print("Encontrei um Caminho! -- Caso de teste: " + str(test_case))
     else:
         print("Não existe um Caminho!")
+        # print_sol(sol)
         # print("Não existe um Caminho! -- Caso de teste: " + str(test_case))
