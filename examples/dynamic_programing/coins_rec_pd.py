@@ -6,29 +6,28 @@ __email__ = "g.cdcomp@gmail.com"
 
 import math
 import itertools
+
 #Min Coins Problem Recursive Solution
 
 max_value = 6 
-# max_coins = 3 
+#Initialize memoization vector with infinity
+memo_vec = [math.inf for x in range(max_value+1)]
 
 coins = [1,3,4]
 
 counter = itertools.count()
-def min_coins_rec(value):
+def min_coins_rec_pd(value):
+    
     if value == 0: 
         return 0
 
     if value < 0:
         return math.inf
 
-    min_depth = math.inf
     for coin in coins:
         next(counter)
-        result = 1 + min_coins_rec(value - coin)
+        memo_vec[value] = min(1 + min_coins_rec_pd(value-coin), memo_vec[value])
 
-        if min_depth > result:
-            min_depth = result
+    return memo_vec[value]
 
-    return min_depth
-
-print(min_coins_rec(max_value), counter)
+print(min_coins_rec_pd(max_value), counter)
